@@ -4,9 +4,22 @@ using System.Text;
 
 namespace PeselValidator.Utils
 {
-    internal class IdentityHelper
+    public class IdentityHelper
     {
         private int[] identityNumberArray;
+
+        public int[] IdentityNumberArray
+        {
+            get
+            {
+                return identityNumberArray;
+            }
+
+           private set
+            {
+                identityNumberArray = value;
+            }
+        }
 
         public IdentityHelper(int[] identityNumberArray)
         {
@@ -14,48 +27,52 @@ namespace PeselValidator.Utils
             {
                 throw new ArgumentException(nameof(identityNumberArray));
             }
-            this.identityNumberArray = identityNumberArray;
+            this.IdentityNumberArray = identityNumberArray;
         }
 
         public bool ValidateIdentity()
         {
-          return ( GetSumDigit() == identityNumberArray[10]);         
+          return ( GetSumDigit() == IdentityNumberArray[10]);         
         }
 
         public DateTime GetDate()
         {
 
-            int day = identityNumberArray[4] * 10 + identityNumberArray[5];
+            int day = IdentityNumberArray[4] * 10 + IdentityNumberArray[5];
             int year = 0;
             int month = 0;
 
-            if (identityNumberArray[2] == 0 || identityNumberArray[2] == 1)
+            if (IdentityNumberArray[2] == 0 || IdentityNumberArray[2] == 1)
             {
-                month = identityNumberArray[2] * 10 + identityNumberArray[3];
+                month = IdentityNumberArray[2] * 10 + IdentityNumberArray[3];
                 year = 1900;
             }
-            else if (identityNumberArray[2] == 2 || identityNumberArray[2] == 3)
+            else if (IdentityNumberArray[2] == 2 || IdentityNumberArray[2] == 3)
             {
-                month = identityNumberArray[2] * 10 + identityNumberArray[3] - 20;
+                month = IdentityNumberArray[2] * 10 + IdentityNumberArray[3] - 20;
                 year = 2000;
             }
-            else if (identityNumberArray[2] == 4 || identityNumberArray[2] == 5)
+            else if (IdentityNumberArray[2] == 4 || IdentityNumberArray[2] == 5)
             {
-                month = identityNumberArray[2] * 10 + identityNumberArray[3] - 40;
+                month = IdentityNumberArray[2] * 10 + IdentityNumberArray[3] - 40;
                 year = 2100;
             }
-            else if (identityNumberArray[2] == 6 || identityNumberArray[2] == 7)
+            else if (IdentityNumberArray[2] == 6 || IdentityNumberArray[2] == 7)
             {
-                month = identityNumberArray[2] * 10 + identityNumberArray[3] - 60;
+                month = IdentityNumberArray[2] * 10 + IdentityNumberArray[3] - 60;
                 year = 2200;
             }
-            else if (identityNumberArray[2] == 8 || identityNumberArray[2] == 9)
+            else if (IdentityNumberArray[2] == 8 || IdentityNumberArray[2] == 9)
             {
-                month = identityNumberArray[2] * 10 + identityNumberArray[3] - 80;
+                month = IdentityNumberArray[2] * 10 + IdentityNumberArray[3] - 80;
                 year = 1800;
             }
-            year += identityNumberArray[0] * 10 + identityNumberArray[1];
+            year += IdentityNumberArray[0] * 10 + IdentityNumberArray[1];
 
+            if (year<1 || month>12 || month<1 || day>31 ||day<1)
+            {
+                throw new Exception("Wrog Date Format");
+            }
             
             return new DateTime(year, month, day);
            
@@ -63,7 +80,7 @@ namespace PeselValidator.Utils
 
         public string GetGender()
         {
-            if (identityNumberArray[9] % 2 == 0)
+            if (IdentityNumberArray[9] % 2 == 0)
             {
                 return "Female";
             }
@@ -73,14 +90,14 @@ namespace PeselValidator.Utils
             }
         }
 
-        private int GetSumDigit()
+        public int GetSumDigit()
         {
             int[] weights = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3, };
 
             int sum = 0;
             for (int i = 0; i < 10; i++)
             {
-                sum += (weights[i] * identityNumberArray[i]);
+                sum += (weights[i] * IdentityNumberArray[i]);
 
             }
             sum %= 10;

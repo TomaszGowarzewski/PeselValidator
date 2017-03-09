@@ -78,8 +78,11 @@ namespace PeselValidator.Controllers
         [HttpGet]
         private ViewResult CompareDateAndGender(DateTime dateTimeFromIdentity, PersonModel personResponse, string genderFromIdentity)
         {
-            if (CompareDates(dateTimeFromIdentity, DateTime.Parse(personResponse.DateOfBirth)) && CompareGender(genderFromIdentity, personResponse.Gender))
+            DateTime ParsedDateTimeFromResponse = DateTime.Parse(personResponse.DateOfBirth);
+            if (CompareDates(dateTimeFromIdentity, ParsedDateTimeFromResponse) && CompareGender(genderFromIdentity, personResponse.Gender))
             {
+                personResponse.DateOfBirth = ParsedDateTimeFromResponse.ToLongDateString();
+
                 PersonModel personFromIdentity = new PersonModel();
                 personFromIdentity.DateOfBirth = dateTimeFromIdentity.ToLongDateString();
                 personFromIdentity.Gender = genderFromIdentity;
@@ -87,7 +90,7 @@ namespace PeselValidator.Controllers
                 EqualsViewModel model = new EqualsViewModel();
                 model.PersonFromForm = personResponse;
                 model.PersonFromIdentity = personFromIdentity;
-
+                
                 return View("DateAndGenderEquals", model);
             }
             ModelState.AddModelError(string.Empty,Resources.IdentityAndDateAreNotEquals);
@@ -100,7 +103,6 @@ namespace PeselValidator.Controllers
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
             return Content(Resources.BadRequest);
         }
-
 
         private bool CompareGender(string genderFromIdentityNumber, string genderFromResponse)
         {
