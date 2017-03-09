@@ -1,7 +1,11 @@
-﻿
+﻿@model PeselValidator.Models.EqualsViewModel
 @{
     ViewBag.Title = "DateAndGenderEquals";
 }
 
 <h2>DateAndGenderEquals</h2>
 
+<p>
+    Płeć (@Html.DisplayTextFor(x=>x.PersonFromForm.Gender)) zgadza się z (@Html.DisplayTextFor(x => x.PersonFromIdentity.Gender))
+    oraz Data (@Html.DisplayTextFor(x => x.PersonFromForm.DateOfBirth)) zgadza się z (@Html.DisplayTextFor(x => x.PersonFromIdentity.DateOfBirth))
+</p>

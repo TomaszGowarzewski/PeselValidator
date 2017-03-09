@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PeselValidator.Controllers
+namespace PeselValidator.Utils
 {
     internal class IdentityHelper
     {
@@ -56,6 +56,7 @@ namespace PeselValidator.Controllers
             }
             year += identityNumberArray[0] * 10 + identityNumberArray[1];
 
+            
             return new DateTime(year, month, day);
            
         }
