@@ -1,0 +1,27 @@
+﻿@model PeselValidator.Models.PersonModel
+
+@{
+    ViewBag.Title = "InformationDisplay";
+}
+
+<h2>InformationDisplay</h2>
+<p>@Html.Label("Cześć "+Model.Name) !</p>
+<p class="h5">
+    @if (Model.Gender == "Male")
+    { @Html.Label("Urodziłeś się w ") }
+    else
+    {
+        @Html.Label("Urodziłaś się")
+    }
+        @Html.Label(Model.DateOfBirth + " roku , i jesteś") 
+    @if (Model.Gender == "Male")
+    {
+        @Html.Label("Mężczyzną")
+    }
+    else
+    {
+        @Html.Label("Kobietą")
+    }
+</p>
+
+
