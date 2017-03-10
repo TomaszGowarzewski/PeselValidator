@@ -13,7 +13,6 @@ namespace PeselValidator.Tests
     [TestFixture]
     class HomeControllerTest
     {
-
         HomeController controller;
 
         [SetUp]

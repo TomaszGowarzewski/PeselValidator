@@ -184,8 +184,6 @@ namespace PeselValidator.Tests
             Assert.AreNotEqual("Male", helper.GetGender());
         }
 
-
-
         [Test]
         public void Get_Sum_Digit_Works_Properly_Returns_1()
         {
@@ -205,6 +203,5 @@ namespace PeselValidator.Tests
 
             Assert.AreNotEqual(1, helper.GetSumDigit());
         }
-
     }
 }

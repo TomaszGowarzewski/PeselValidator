@@ -75,7 +75,7 @@ namespace PeselValidator.Utils
             }
             
             return new DateTime(year, month, day);
-           
+          
         }
 
         public string GetGender()
@@ -98,7 +98,6 @@ namespace PeselValidator.Utils
             for (int i = 0; i < 10; i++)
             {
                 sum += (weights[i] * IdentityNumberArray[i]);
-
             }
             sum %= 10;
             sum = 10 - sum;
