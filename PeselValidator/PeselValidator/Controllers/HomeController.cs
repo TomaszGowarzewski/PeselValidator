@@ -75,7 +75,6 @@ namespace PeselValidator.Controllers
             return View("InformationDisplay", newPersonModel);
         }
 
-        [HttpGet]
         private ViewResult CompareDateAndGender(DateTime dateTimeFromIdentity, PersonModel personResponse, string genderFromIdentity)
         {
             DateTime ParsedDateTimeFromResponse = DateTime.Parse(personResponse.DateOfBirth);
@@ -107,7 +106,6 @@ namespace PeselValidator.Controllers
             }                    
         }
 
-        [HttpGet]
         public ContentResult BadRequest(string Message)
         {
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
