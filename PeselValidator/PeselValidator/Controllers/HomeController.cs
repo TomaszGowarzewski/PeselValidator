@@ -32,9 +32,9 @@ namespace PeselValidator.Controllers
                 {
                     IdentityNumberArray = personResponse.IdentityNumber.Select(x => int.Parse(x.ToString())).ToArray();
                 }
-                catch
+                catch(ArgumentNullException ex)
                 {
-                    return RedirectToAction("BadRequest", "Home");
+                    return RedirectToAction("BadRequest", "Home", new { Message = ex.Message });
                 }
 
                 IdentityHelper helper = new IdentityHelper(IdentityNumberArray);
@@ -49,7 +49,6 @@ namespace PeselValidator.Controllers
                 if (String.IsNullOrEmpty(checkCorrectnessOfDateAndID))
                 {
                     return CheckIdentityNumber(helper, dateTimeFromIdentity, genderFromIdentity, personResponse);
-
                 }
                 else if (String.IsNullOrEmpty(checkDateAndGender))
                 {
@@ -72,6 +71,7 @@ namespace PeselValidator.Controllers
             newPersonModel.DateOfBirth = dateTimeFromIdentity.ToLongDateString();
             newPersonModel.Gender = genderFromIdentity;
             newPersonModel.Name = personResponse.Name;
+            newPersonModel.IdentityNumber = personResponse.IdentityNumber;
             return View("InformationDisplay", newPersonModel);
         }
 
@@ -79,7 +79,19 @@ namespace PeselValidator.Controllers
         private ViewResult CompareDateAndGender(DateTime dateTimeFromIdentity, PersonModel personResponse, string genderFromIdentity)
         {
             DateTime ParsedDateTimeFromResponse = DateTime.Parse(personResponse.DateOfBirth);
-            if (CompareDates(dateTimeFromIdentity, ParsedDateTimeFromResponse) && CompareGender(genderFromIdentity, personResponse.Gender))
+            if (!CompareDates(dateTimeFromIdentity, ParsedDateTimeFromResponse))
+            {
+                ModelState.AddModelError(string.Empty, Resources.IdentityDate);
+            }
+            if (!CompareGender(genderFromIdentity, personResponse.Gender))
+            {
+                ModelState.AddModelError(string.Empty, Resources.IdentityGender);
+            }
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            else
             {
                 personResponse.DateOfBirth = ParsedDateTimeFromResponse.ToLongDateString();
 
@@ -90,31 +102,29 @@ namespace PeselValidator.Controllers
                 EqualsViewModel model = new EqualsViewModel();
                 model.PersonFromForm = personResponse;
                 model.PersonFromIdentity = personFromIdentity;
-                
+
                 return View("DateAndGenderEquals", model);
-            }
-            ModelState.AddModelError(string.Empty,Resources.IdentityAndDateAreNotEquals);
-            return View();
+            }                    
         }
 
         [HttpGet]
-        public ContentResult BadRequest()
+        public ContentResult BadRequest(string Message)
         {
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
             return Content(Resources.BadRequest);
         }
 
-        private bool CompareGender(string genderFromIdentityNumber, string genderFromResponse)
+        public bool CompareGender(string genderFromIdentityNumber, string genderFromResponse)
         {
             return string.Equals(genderFromIdentityNumber, genderFromResponse);
         }
 
-        private bool CompareDates(DateTime dateFromIdentityNumber, DateTime dateFromResponse)
+        public bool CompareDates(DateTime dateFromIdentityNumber, DateTime dateFromResponse)
         {
             return (DateTime.Equals(dateFromIdentityNumber, dateFromResponse));
         }
 
-        private bool ValidateIdentityNumber(IdentityHelper helper)
+        public bool ValidateIdentityNumber(IdentityHelper helper)
         {
             return helper.ValidateIdentity();
         }

@@ -101,7 +101,7 @@ namespace PeselValidator.Tests
 
             helper = new IdentityHelper(IdentityNumber);
 
-            Assert.That(() => helper.GetDate(), Throws.TypeOf<Exception>().With.Message.EqualTo("Wrog Date Format"));
+            Assert.That(() => helper.GetDate(), Throws.TypeOf<Exception>().With.Message.EqualTo("Wrong Date Format"));
         }
 
         [Test]
@@ -111,7 +111,7 @@ namespace PeselValidator.Tests
 
             helper = new IdentityHelper(IdentityNumber);
 
-            Assert.That(() => helper.GetDate(), Throws.TypeOf<Exception>().With.Message.EqualTo("Wrog Date Format"));
+            Assert.That(() => helper.GetDate(), Throws.TypeOf<Exception>().With.Message.EqualTo("Wrong Date Format"));
         }
 
         [Test]
@@ -121,17 +121,17 @@ namespace PeselValidator.Tests
 
             helper = new IdentityHelper(IdentityNumber);
 
-            Assert.That(() => helper.GetDate(), Throws.TypeOf<Exception>().With.Message.EqualTo("Wrog Date Format"));
+            Assert.That(() => helper.GetDate(), Throws.TypeOf<Exception>().With.Message.EqualTo("Wrong Date Format"));
         }
 
         [Test]
-        public void Get_Date_Does_Throws_Exception_Month_Equals_13()
+        public void Get_Date_Throws_Exception_Month_Equals_13()
         {
             int[] IdentityNumber = { 8, 0, 1, 3, 0, 0, 1, 4, 1, 6, 2 };
 
             helper = new IdentityHelper(IdentityNumber);
 
-            Assert.That(() => helper.GetDate(), Throws.TypeOf<Exception>().With.Message.EqualTo("Wrog Date Format"));
+            Assert.That(() => helper.GetDate(), Throws.TypeOf<Exception>().With.Message.EqualTo("Wrong Date Format"));
         }
 
         [Test]
@@ -141,7 +141,7 @@ namespace PeselValidator.Tests
 
             helper = new IdentityHelper(IdentityNumber);
 
-            Assert.That(() => helper.GetDate(), Throws.TypeOf<Exception>().With.Message.EqualTo("Wrog Date Format"));
+            Assert.That(() => helper.GetDate(), Throws.TypeOf<Exception>().With.Message.EqualTo("Wrong Date Format"));
         }
 
         [Test]

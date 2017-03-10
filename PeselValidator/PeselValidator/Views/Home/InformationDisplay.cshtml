@@ -3,25 +3,45 @@
 @{
     ViewBag.Title = "InformationDisplay";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Information</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Styles.css" />
+</head>
+<body>
+    <div class="container jumbotron">
+        <h2 class="text-center">@Html.Label("Cześć " + Model.Name) !</h2>
+    </div>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h5 class="text-justify">
+                    @if (Model.Gender == "Male")
+                    {
+                        @Html.Label("Urodziłeś się w ") }
+                    else
+                    {
+                        @Html.Label("Urodziłaś się")
+                    }
+                    @Html.Label(Model.DateOfBirth + " roku , i jesteś")
+                    @if (Model.Gender == "Male")
+                    {
+                        @Html.Label("Mężczyzną")
+                    }
+                    else
+                    {
+                        @Html.Label("Kobietą")
+                    }
+                </h5>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
 
-<h2>InformationDisplay</h2>
-<p>@Html.Label("Cześć "+Model.Name) !</p>
-<p class="h5">
-    @if (Model.Gender == "Male")
-    { @Html.Label("Urodziłeś się w ") }
-    else
-    {
-        @Html.Label("Urodziłaś się")
-    }
-        @Html.Label(Model.DateOfBirth + " roku , i jesteś") 
-    @if (Model.Gender == "Male")
-    {
-        @Html.Label("Mężczyzną")
-    }
-    else
-    {
-        @Html.Label("Kobietą")
-    }
-</p>
+
 
 

@@ -71,7 +71,7 @@ namespace PeselValidator.Utils
 
             if (year<1 || month>12 || month<1 || day>31 ||day<1)
             {
-                throw new Exception("Wrog Date Format");
+                throw new Exception("Wrong Date Format");
             }
             
             return new DateTime(year, month, day);

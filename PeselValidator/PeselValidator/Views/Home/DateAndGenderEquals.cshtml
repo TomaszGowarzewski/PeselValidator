@@ -2,10 +2,44 @@
 @{
     ViewBag.Title = "DateAndGenderEquals";
 }
-
-<h2>DateAndGenderEquals</h2>
-
-<p>
-    Płeć (@Html.DisplayTextFor(x=>x.PersonFromForm.Gender)) zgadza się z (@Html.DisplayTextFor(x => x.PersonFromIdentity.Gender))
-    oraz Data (@Html.DisplayTextFor(x => x.PersonFromForm.DateOfBirth)) zgadza się z (@Html.DisplayTextFor(x => x.PersonFromIdentity.DateOfBirth))
-</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Information</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Styles.css" />
+</head>
+<body>
+    <div class="container jumbotron">
+        <h2 class="text-center">@Html.Label("Cześć " + Model.PersonFromForm.Name) !</h2>
+    </div>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h5 class="text-justify">
+                    Płeć
+                    @if (Model.PersonFromForm.Gender == "Male")
+                    {
+                        <text>(Mężczyzna)</text>
+                    }
+                    else
+                    {
+                        <text>(Kobieta)</text>
+                    }
+                    zgadza się z
+                    @if (Model.PersonFromIdentity.Gender == "Male")
+                    {
+                        <text>(Mężczyzna)</text>
+                    }
+                    else
+                    {
+                        <text>(Kobieta)</text>
+                    }
+                    oraz Data (@Html.DisplayTextFor(x => x.PersonFromForm.DateOfBirth)) zgadza się z (@Html.DisplayTextFor(x => x.PersonFromIdentity.DateOfBirth))
+                </h5>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -70,11 +70,20 @@ namespace PeselValidator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Niestety ale dane nie są jednakowe ;(.
+        ///   Looks up a localized string similar to Niestety ale daty nie się nie zgadzają ;(.
         /// </summary>
-        internal static string IdentityAndDateAreNotEquals {
+        internal static string IdentityDate {
             get {
-                return ResourceManager.GetString("IdentityAndDateAreNotEquals", resourceCulture);
+                return ResourceManager.GetString("IdentityDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niestety ale płcie nie się nie zgadza ;(.
+        /// </summary>
+        internal static string IdentityGender {
+            get {
+                return ResourceManager.GetString("IdentityGender", resourceCulture);
             }
         }
         

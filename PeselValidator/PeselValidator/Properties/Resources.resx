@@ -120,8 +120,11 @@
   <data name="BadRequest" xml:space="preserve">
     <value>Whoops, Something went wrong :( </value>
   </data>
-  <data name="IdentityAndDateAreNotEquals" xml:space="preserve">
-    <value>Niestety ale dane nie są jednakowe ;(</value>
+  <data name="IdentityDate" xml:space="preserve">
+    <value>Niestety ale daty nie się nie zgadzają ;(</value>
+  </data>
+  <data name="IdentityGender" xml:space="preserve">
+    <value>Niestety ale płcie nie się nie zgadza ;(</value>
   </data>
   <data name="WrongIdentity" xml:space="preserve">
     <value>Niestety ale PESEL nie jest prawidłowy ;( </value>
